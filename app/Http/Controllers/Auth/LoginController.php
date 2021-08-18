@@ -40,6 +40,9 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'mobile';
+        $idintify = request()->input('idintify');
+        $username = filter_var($idintify, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
+        request()->merge([$username=>$idintify]);
+        return $username;
     }
 }
